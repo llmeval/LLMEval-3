@@ -51,7 +51,7 @@ Our benchmark covers **13 major academic disciplines** as defined by the Ministr
 | **Gemini-2.5-Pro-Preview-Thinking** | Google | API | 2025.7.21 | **97.15** | 91.00 |
 | **DeepSeek-V3** | DeepSeek | API | 2025.7.21 | **96.48** | 90.37 |
 
-> View the complete leaderboard with 47+ models in our [full results section](#complete-results).
+> View the complete leaderboard with 47+ models in our [Complete Results](#complete-results) section.
 
 ## 🔬 Methodology
 
@@ -181,7 +181,7 @@ Visit our evaluation platform: **[http://llmeval.com/](http://llmeval.com/)**
 - **Comprehensive Reporting**: Detailed performance analytics
 - **Leaderboard Integration**: Automatic ranking updates
 
-## 📋 Complete Results
+## 📋 Complete Results {#complete-results}
 
 <details>
 <summary>Click to view complete leaderboard (47 models)</summary>
@@ -240,7 +240,7 @@ Visit our evaluation platform: **[http://llmeval.com/](http://llmeval.com/)**
 
 </details>
 
-## 📊 Discipline-Specific Performance
+## 📊 Discipline-Specific Performance {#discipline-performance}
 
 <details>
 <summary>View performance breakdown by academic discipline</summary>

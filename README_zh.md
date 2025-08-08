@@ -51,7 +51,7 @@ LLMEval-3 是一个针对大语言模型（LLMs）进行**鲁棒性和公平性�
 | **Gemini-2.5-Pro-Preview-Thinking** | Google | API | 2025.7.21 | **97.15** | 91.00 |
 | **DeepSeek-V3** | DeepSeek | API | 2025.7.21 | **96.48** | 90.37 |
 
-> 查看包含47+模型的[完整排行榜](#完整结果)。
+> 查看包含47+模型的[完整排行榜](#complete-results)。
 
 ## 🔬 评测方法
 
@@ -180,7 +180,7 @@ LLMEval-3在大语言模型评测领域做出了开创性贡献，建立了首�
 - **全面报告**：详细的性能分析
 - **排行榜集成**：自动排名更新
 
-## 📋 完整结果
+## 📋 完整结果 {#complete-results}
 
 <details>
 <summary>点击查看完整排行榜（47个模型）</summary>
@@ -239,7 +239,7 @@ LLMEval-3在大语言模型评测领域做出了开创性贡献，建立了首�
 
 </details>
 
-## 📊 学科专业表现
+## 📊 学科专业表现 {#discipline-performance}
 
 <details>
 <summary>查看各学科领域性能分解</summary>
