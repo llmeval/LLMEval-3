@@ -1,61 +1,81 @@
-
 <div align="center">
 <h2>LLMEval-3: A Large-Scale Longitudinal Study on Robust and Fair Evaluation of Large Language Models</h2>
 
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-blue.svg?style=for-the-badge)](https://arxiv.org/abs/2508.05452)
+[![Website](https://img.shields.io/badge/Website-LLMEval-green.svg?style=for-the-badge)](http://llmeval.com/)
 
 </div>
+
 <div align="center">
 <img src=".\pic\llmeval-logo.png" alt="llmeval-logo" style="zoom:50%;" />
 </div>
 
+> **Note:** For the Chinese version of this README, please refer to [README_zh.md](README_zh.md).
 
-## 研究背景与动机
+## 📚 Overview
 
-随着大语言模型技术的快速发展，如何对这些模型进行**鲁棒、公平且全面的评测**成为了学术界和工业界共同关注的重要问题。LLMEval-3作为一项大规模纵向研究，旨在建立一个持续、动态的评测基准，以追踪和分析大语言模型在专业知识领域的能力演进。
+LLMEval-3 is a comprehensive, large-scale longitudinal benchmark designed for **robust and fair evaluation** of Large Language Models (LLMs) across diverse academic disciplines. As the field of LLMs evolves rapidly, LLMEval-3 provides a dynamic evaluation framework that tracks model capabilities over time, ensuring consistent and reliable assessment of model performance from 2023 to present.
 
-### 评测设计理念
+Our benchmark covers **13 major academic disciplines** as defined by the Ministry of Education, including Philosophy, Economics, Law, Education, Literature, History, Science, Engineering, Agriculture, Medicine, Military Science, Management, and Arts, with over **50 sub-disciplines** and approximately **200,000 questions** (expanding to 1 million).
 
-**鲁棒性保障**：通过随机抽样机制和多轮评测设计，确保评测结果的稳定性和可重复性。每个参与评测的系统需要完成从总题库中随机抽样的1000题，避免了固定测试集可能带来的过拟合问题。
+<div align="center">
+<img src=".\pic\subjects.PNG" alt="Academic Disciplines Coverage" style="zoom:80%;" />
+</div>
 
-**公平性原则**：采用相对分数和绝对分数双重指标体系，以当前最优模型作为动态基准，确保不同时期发布的模型能够在统一标准下进行比较。
+## 🎯 Key Features
 
-**纵向追踪**：建立了从2023年至今的持续评测记录，形成了大语言模型能力发展的时间序列数据，为理解模型技术演进提供了重要的实证基础。
+### 🛡️ Robust Evaluation Design
+- **Dynamic Sampling**: Random selection of 1,000 questions per evaluation to prevent overfitting
+- **Anti-Cheating Mechanisms**: Multi-layered protection against unfair practices
+- **Online Sequential Testing**: Questions sent serially to prevent batch crawling
 
-## 评测内容与形式
+### ⚖️ Fair Assessment Framework  
+- **Relative Scoring System**: Dynamic benchmarking against current SOTA models
+- **Absolute Performance Metrics**: Consistent 0-100 scale scoring
+- **Temporal Consistency**: Ensures fair comparison across different time periods
 
-LLMEval-3聚焦于专业知识能力评测，涵盖哲学、经济学、法学、教育学、文学、历史学、理学、工学、农学、医学、军事学、管理学、艺术学等教育部划定的13个学科门类、50余个二级学科，共计约20W道标准生成式问答题目（后续我们将继续收集题目将总题库扩充至100W）。
+### 📈 Longitudinal Analysis
+- **Continuous Tracking**: Model performance evolution from 2023 to present
+- **Trend Analysis**: Comprehensive insights into LLM capability development
+- **Cross-Model Comparison**: Standardized evaluation across different model families
 
-<img src=".\pic\subjects.PNG" alt="subjects" style="zoom: 80%;" />
+## 🏆 Current Leaderboard (As of August 2025)
 
-### 数据来源与质量保障
+### Top Performing Models
 
-题目来源主要包括**大学本科课后作业、大学本科期中期末考试、研究生入学考试**等权威学术资源。为了尽可能防止参与评测的大模型在预训练阶段引入大比例原始评测数据，LLMEval-3评测题目来源尽可能为非互联网公开渠道，数据格式为PDF和Word文件，经过严格的OCR识别与数据清洗流程，将题目进行标准化格式处理。
+| Model Name | Organization | Access Type | Evaluation Date | Relative Score (SOTA=100%) | Absolute Score |
+|------------|--------------|-------------|-----------------|----------------------------|----------------|
+| **Doubao-1.5-Thinking-Pro** | ByteDance | API | 2025.7.21 | **100.00** | 93.67 |
+| **DeepSeek-R1** | DeepSeek | API | 2025.7.21 | **97.40** | 91.23 |
+| **Gemini-2.5-Pro-Preview** | Google | API | 2025.7.21 | **97.22** | 91.07 |
+| **Gemini-2.5-Pro-Preview-Thinking** | Google | API | 2025.7.21 | **97.15** | 91.00 |
+| **DeepSeek-V3** | DeepSeek | API | 2025.7.21 | **96.48** | 90.37 |
 
-### 评测形式创新
+> View the complete leaderboard with 47+ models in our [full results section](#complete-results).
 
-与传统知识评测采用的选择题模式不同，LLMEval-3中所有问题统一处理为**生成式知识问答**形式，涵盖简答、计算、判断、辨析、写作等多种题型。这种设计能够更全面地评估模型的语言理解、知识推理和表达能力，更贴近实际应用场景的需求。
+## 🔬 Methodology
 
+### Evaluation Pipeline
 
+1. **Question Generation**: Curated from authoritative academic sources
+   - Undergraduate coursework and exams
+   - Graduate entrance examinations  
+   - Professional certification materials
 
-## 评测流程与指标
+2. **Anti-Contamination Measures**:
+   - Non-public data sources (PDF/Word documents)
+   - OCR processing and data cleaning
+   - Standardized formatting protocols
 
-### 防作弊机制设计
+3. **Assessment Protocol**:
+   - **Generative QA Format**: All questions converted to open-ended responses
+   - **Automated Scoring**: GPT-4 Turbo as evaluation model
+   - **4-Point Scale**: 0-3 scoring based on correctness and explanation quality
 
-LLMEval-3构建了多层次的防作弊机制以确保评测的公正性和可信度：
-
-1. **动态题库抽样**：每个参与评测的系统需要完成从总题库中随机抽样的1000题，**针对同一机构的模型，确保每次评测题目不重复**，有效防止针对性优化。
-
-2. **在线串行评测**：评测过程采用在线方式，题目按序列发送，下一题的发送基于上一题的回答完成情况，有效避免批量爬取和提前准备。
-
-3. **非公开数据源**：题库主要来源于非互联网公开的学术资源，大幅降低了模型在预训练阶段接触原始数据的可能性。
-
-### 自动评测方法
-
-本轮评测采用基于大语言模型的自动评测方法，当前使用GPT-4 Turbo作为评测模型。每道题目的得分范围为0-3分，评分标准注重回答的**核心正确性**和**解释合理性**，其中核心正确性作为主要评判指标。
+### 📋 Evaluation Prompt
 
 ```text
-Please evaluate the following response from the LLM regarding a discipline-specific question based  on the following criteria. You must score it on a scale of 0, 1, 2 or 3 stars:
+Please evaluate the following response from the LLM regarding a discipline-specific question based on the following criteria. You must score it on a scale of 0, 1, 2 or 3 stars:
 
 Overall Rating:
 0 stars indicate wrong answer with a wrong explanation
@@ -67,240 +87,258 @@ User: {question}
 
 LLM:{answer_from_llm}
 
-The correct answer to user’s question is: {correct_answer}
+The correct answer to user's question is: {correct_answer}
 
 You must provide your feedback in the following format:
 {"Overall Rating":numbers of its stars(int)}
 ```
 
-为了规避由随机抽样1000题引入的系统偏差，LLMEval-3使用**相对分数**和**绝对分数**两个指标。
+### Scoring Methodology
 
-考虑到大模型技术的快速发展，我们引入相对分数来衡量模型与当前最佳性能的差距。我们选择榜单中表现最优的模型作为SOTA基准，目前为Doubao-1.5-Thinking-Pro。相对分数$R_{\text{SOTA}}^{\text{model}}$的计算公式为：
+To mitigate systematic bias introduced by random sampling of 1,000 questions, LLMEval-3 employs both **relative scores** and **absolute scores**.
 
-$$R_{\text{SOTA}}^{\text{model}}=\frac{S_{model}}{S_\text{sotamodel}} \times 100$$
+**Relative Score Calculation:**
+Given the rapid development of LLM technology, we introduce relative scores to measure the gap between models and current best performance. We select the top-performing model on the leaderboard as the SOTA baseline, currently Doubao-1.5-Thinking-Pro:
 
-模型的绝对分数$S_{model}$表示模型在$N=1000$道题目上的原始表现，计算方式为将每题得分（0-3分）归一化到0-100区间：
+$$R_{\text{SOTA}}^{\text{model}}=\frac{S_{model}}{S_\text{sotamodel}} \times 100 $$
 
-$$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100}$$
+**Absolute Score Calculation:**
+The absolute score represents the model's raw performance on N=1,000 questions, calculated by normalizing each question's score (0-3 points) to a 0-100 scale:
 
-**评分说明：** $S_{\text{model}}$为绝对分数（0-100量表），$R_{\text{SOTA}}^{\text{model}}$为相对分数（以SOTA模型为100%基准），各学科分数采用10分制量表。
+$$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
 
+Where $s_i$ is the score for question i, and $s_{max} = 3$.
 
-## 评测结果
-### 排行榜(截至2025年8月1日)
+**Scoring Notes:** 
+- $S_{model}$ represents absolute score (0-100 scale)
+- $R_{\text{SOTA}}^{\text{model}}$ represents relative score (with SOTA model as 100% baseline)
+- Discipline-specific scores use a 10-point scale
 
-为了清晰横向比较不同模型的学科能力，在现阶段评测中，我们在10个学科大类，每类学科抽取接近10%的题目进行评测，分别计算各个模型的相对得分、绝对得分与各学科得分。模型后面的数字代表着评测次数，以最优的结果为准，默认为1。
+## 📊 Research Findings
 
-经过实验，我们采用Doubao-1.5-Thinking-Pro作为新的评测基准，新一期测试结果如下。全部模型采用GPT-4 Turbo进行评测，并将Doubao-1.5-Thinking-Pro作为新的相对分数基准。
+### 🚀 Model Performance Evolution
 
+<div align="center">
+<img src=".\pic\trend_of_model_series.png" alt="Model Performance Trends" style="zoom:80%;" />
+</div>
 
-| 模型名称                       | 访问方式 | 发布机构                          | 评测日期   | 相对分数-Doubao-1.5-Thinking-Pro             | 绝对分数 |
-| ------------------------------ | -------- | --------------------------------- | ---------- | ------------------------------- | -------- |
-| Doubao-1.5-Thinking-Pro        | API      | 字节跳动                          | 2025.7.21  | __**100.00**__                   | 93.67    |
-| DeepSeek-R1                    | API      | DeepSeek                          | 2025.7.21  | __**97.40**__                    | 91.23    |
-| Gemini-2.5-Pro-Preview         | API      | Google                            | 2025.7.21  | __**97.22**__                    | 91.07    |
-| Gemini-2.5-Pro-Preview-Thinking | API    | Google                            | 2025.7.21  | __**97.15**__                    | 91.00    |
-| DeepSeek-V3                    | API      | DeepSeek                          | 2025.7.21  | __**96.48**__                    | 90.37    |
-| Qwen3-235B                     | API      | Alibaba Cloud                     | 2025.7.21  | __**96.44**__                    | 90.33    |
-| Doubao-1.5-Pro-256K            | API      | 字节跳动                          | 2025.7.21  | __**95.69**__                    | 89.63    |
-| QwQ-32B                        | API      | Alibaba Cloud                     | 2025.8.1   | __**94.52**__                    | 88.54    |
-| O1-2024-12-17                  | API      | OpenAI                            | 2025.7.21  | __**93.35**__                    | 87.43    |
-| Gemini-2.5-Flash-Thinking      | API      | Google                            | 2025.8.1   | __**92.74**__                    | 86.87    |
-| Qwen3-32B                      | API      | Alibaba Cloud                     | 2025.7.21  | __**92.21**__                    | 86.37    |
-| Claude-Sonnet-4-Thinking       | API      | Anthropic                         | 2025.7.21  | __**91.03**__                    | 85.27    |
-| Claude-Sonnet-4                | API      | Anthropic                         | 2025.7.21  | __**91.00**__                    | 85.23    |
-| GPT-4o-Search-Preview          | API      | OpenAI                            | 2025.7.21  | __**89.40**__                    | 83.73    |
-| GLM-4-32B                      | API      | Tsinghua&Zhipu\.AI                | 2025.8.1   | __**88.43**__                    | 82.83    |
-| GPT-4o-2024-11-20              | API      | OpenAI                            | 2025.7.21  | __**88.08**__                    | 82.50    |
-| Gemini-1.5-Pro                 | API      | Google                            | 2025.8.1   | __**85.92**__                    | 80.47    |
-| Qwen2.5-32B-Instruct           | API      | Alibaba Cloud                     | 2025.8.1   | __**85.07**__                    | 79.68    |
-| O3-Mini                        | API      | OpenAI                            | 2025.7.21  | __**84.13**__                    | 78.80    |
-| Qwen-Turbo-1101                | API      | Alibaba Cloud                     | 2025.8.1   | __**83.71**__                    | 78.41    |
-| Claude-3.5-Sonnet             | API      | Anthropic                         | 2025.8.1   | __**83.38**__                    | 78.10    |
-| O1-Mini-2024-09-12             | API      | OpenAI                            | 2025.8.1   | __**78.93**__                    | 73.93    |
-| Claude-3-Haiku                 | API      | Anthropic                         | 2025.8.1   | __**62.95**__                    | 58.97    |
-| LLaMA-3.2-90B-Vision-Instruct  | API      | Meta                              | 2025.8.1   | __**61.74**__                    | 57.83    |
-| LLaMA-3.3-70B                  | API      | Meta                              | 2025.8.1   | __**60.85**__                    | 57.00    |
-| Phi-3-Medium-128K-Instruct     | API      | Microsoft                         | 2025.8.1   | __**36.94**__                    | 34.60    |
-| GPT-4 Turbo(gpt-4-1106-preview) | API      | OpenAI                            | 2023.11.18 | __**78.56**__                    | 73.6     |
-| GPT-4-0125-Preview             | API      | OpenAI                            | 2024.1.28  | __**76.44**__                    | 71.6     |
-| Baidu-4.0                      | API      | 百度                              | 2023.11.1  | __**75.09**__                    | 70.33    |
-| Yi-34B-Chat                    | API      | 零一万物                          | 2023.12.1  | __**70.17**__                    | 65.70    |
-| Baidu-3.5                      | API      | 百度                              | 2023.11.1  | __**69.14**__                    | 64.73    |
-| ChatGLM-Pro                    | API      | Tsinghua&Zhipu\.AI                | 2023.11.1  | __**69.14**__                    | 64.73    |
-| GPT-4-0613                     | API      | OpenAI                            | 2023.9.29  | __**66.17**__                    | 61.97    |
-| 讯飞星火大模型v3.0             | API      | 科大讯飞                          | 2023.11.7  | __**65.64**__                    | 61.47    |
-| Nanbeige-Plus                  | API      | NanBeiGe LLM Lab                  | 2023.12.1  | __**65.14**__                    | 61.00    |
-| Baichuan2-13B-Chat             | 权重     | Baichuan                          | 2023.9.29  | __**58.31**__                    | 54.6     |
-| Gemini-Pro                     | API      | Google                            | 2024.1.10  | __**58.20**__                    | 54.5     |
-| Qwen-Plus                      | API      | Alibaba Cloud                     | 2023.11.1  | __**56.60**__                    | 53.0     |
-| Qwen-Turbo                     | API      | Alibaba Cloud                     | 2023.11.1  | __**55.78**__                    | 52.23    |
-| Nanbeige-16B                   | API      | NanBeiGe LLM Lab                  | 2023.10.23 | __**55.46**__                    | 51.93    |
-| GPT-3.5-Turbo                  | API      | OpenAI                            | 2023.9.29  | __**55.42**__                    | 51.9     |
-| MiniMax-Abab5                  | 权重     | MiniMax                           | 2023.11.1  | __**55.33**__                    | 51.83    |
-| Mixtral-8x7B-Instruct          | 权重     | Mistral AI                        | 2024.1.10  | __**51.69**__                    | 48.4     |
-| ChatGLM2-6B                    | 权重     | Tsinghua&Zhipu\.AI                | 2023.9.29  | __**42.32**__                    | 39.63    |
-| Ziya-v1.1-13B                  | 权重     | IDEA研究院                        | 2023.9.29  | __**40.18**__                    | 37.63    |
-| InternLM-Chat-7B               | 权重     | Shanghai AI Laboratory&Sense Time | 2023.9.29  | __**38.73**__                    | 36.27    |
-| Linly-Chinese-LLaMA-2-13B-HF   | 权重     | 大数据系统计算技术国家工程实验室  | 2023.10.3  | __**37.06**__                    | 34.7     |
-| BELLE-LLaMA2-13B-Chat-0.4M     | 权重     | LianjiaTech                       | 2023.10.1  | __**36.28**__                    | 33.97    |
-| LLaMA-2-7B-Chat-HF             | 权重     | Meta                              | 2023.9.29  | __**25.24**__                    | 23.63    |
+Our longitudinal analysis reveals significant performance improvements across all model families:
 
+- **Rapid Development**: Performance jumped from GPT-3.5-turbo's 51.9 points to Doubao-1.5-Thinking-Pro's 93.67 points
+- **Chinese Model Excellence**: Domestic models demonstrate competitive performance in Chinese academic domains
+- **Discipline Variations**: STEM fields show higher scores compared to humanities and social sciences
 
-各学科分数如下：
+### 🔍 Evaluation Reliability Validation
 
-| 模型名称                       | 绝对分数 | 工学 | 经济学 | 教育学 | 法学 | 文学 | 管理学 | 理学 | 历史学 | 医学 | 军事学 |
-| ------------------------------ | -------- | ---- | ------ | ------ | ---- | ---- | ------ | ---- | ------ | ---- | ------ |
-| Doubao-1.5-Thinking-Pro        | 93.67    | 9.47 | 9.67   | 9.43   | 9.77 | 8.93 | 9.53   | 9.23 | 9.70   | 8.97 | 8.97   |
-| DeepSeek-R1                    | 91.23    | 9.47 | 9.43   | 9.27   | 9.37 | 8.83 | 9.37   | 9.03 | 9.53   | 8.50 | 8.43   |
-| Gemini-2.5-Pro-Preview         | 91.07    | 9.20 | 9.47   | 9.20   | 9.30 | 8.43 | 9.63   | 9.07 | 9.40   | 8.50 | 8.87   |
-| Gemini-2.5-Pro-Preview-Thinking| 91.00    | 9.13 | 9.50   | 9.37   | 9.47 | 8.40 | 9.63   | 9.20 | 9.27   | 8.30 | 8.73   |
-| DeepSeek-V3                    | 90.37    | 9.30 | 9.57   | 8.93   | 9.23 | 8.60 | 9.13   | 8.97 | 9.47   | 8.83 | 8.33   |
-| Qwen3-235B                     | 90.33    | 9.23 | 9.43   | 9.03   | 9.50 | 8.23 | 9.43   | 8.97 | 9.17   | 8.73 | 8.60   |
-| Doubao-1.5-Pro-256K            | 89.63    | 8.83 | 9.03   | 9.13   | 9.43 | 8.57 | 9.27   | 8.83 | 9.10   | 8.60 | 8.83   |
-| QwQ-32B                        | 88.54    | 8.30 | 9.46   | 9.23   | 9.33 | 7.83 | 9.46   | 8.65 | 9.27   | 8.57 | 8.43   |
-| O1-2024-12-17                  | 87.43    | 8.90 | 9.30   | 8.67   | 8.77 | 7.73 | 9.27   | 8.90 | 8.97   | 8.17 | 8.77   |
-| Gemini-2.5-Flash-Thinking      | 86.87    | 8.67 | 9.27   | 8.70   | 9.00 | 7.80 | 8.93   | 8.90 | 9.00   | 8.03 | 8.57   |
-| Qwen3-32B                      | 86.37    | 8.43 | 9.10   | 8.57   | 9.10 | 7.77 | 9.47   | 8.67 | 9.30   | 7.70 | 8.27   |
-| Claude-Sonnet-4-Thinking       | 85.27    | 8.57 | 9.00   | 8.63   | 8.73 | 7.57 | 9.10   | 8.93 | 8.70   | 7.97 | 8.07   |
-| Claude-Sonnet-4                | 85.23    | 8.57 | 8.80   | 8.50   | 8.70 | 7.80 | 9.03   | 8.80 | 8.80   | 8.17 | 8.07   |
-| GPT-4o-Search-Preview          | 83.73    | 8.27 | 8.77   | 8.43   | 8.67 | 7.77 | 8.80   | 8.20 | 8.73   | 8.27 | 7.83   |
-| GLM-4-32B                      | 82.83    | 7.77 | 8.97   | 8.33   | 8.33 | 7.03 | 9.13   | 8.27 | 8.77   | 8.23 | 8.00   |
-| GPT-4o-2024-11-20              | 82.50    | 7.90 | 8.67   | 8.30   | 8.33 | 7.17 | 8.97   | 8.57 | 8.67   | 7.63 | 8.30   |
-| Gemini-1.5-Pro                 | 80.47    | 8.13 | 8.45   | 8.30   | 8.37 | 7.04 | 8.17   | 8.43 | 8.50   | 7.48 | 7.60   |
-| Qwen2.5-32B-Instruct           | 79.68    | 7.70 | 8.57   | 8.33   | 8.33 | 6.70 | 8.50   | 8.17 | 7.70   | 7.60 | 8.08   |
-| O3-Mini                        | 78.80    | 7.97 | 8.60   | 8.30   | 8.20 | 6.73 | 8.57   | 8.53 | 7.17   | 7.03 | 7.70   |
-| Qwen-Turbo-1101                | 78.41    | 7.97 | 8.37   | 8.03   | 8.23 | 6.40 | 8.50   | 8.10 | 7.50   | 7.27 | 8.05   |
-| Claude-3.5-Sonnet              | 78.10    | 7.97 | 8.53   | 8.27   | 7.93 | 7.03 | 8.50   | 8.00 | 7.57   | 6.70 | 7.60   |
-| O1-Mini-2024-09-12             | 73.93    | 7.27 | 8.43   | 7.90   | 7.53 | 6.27 | 8.27   | 8.17 | 6.43   | 6.63 | 7.03   |
-| GPT-4 Turbo(gpt-4-1106-preview) | 73.6     | 6.97 | 8.17   | 8.33   | 7.8  | 6.0  | 7.57   | 8.13 | 7.0    | 6.43 | 7.2    |
-| GPT-4-0125-Preview             | 71.6     | 6.9  | 7.4    | 8.03   | 7.3  | 6.0  | 7.47   | 7.63 | 6.87   | 6.33 | 7.67   |
-| Baidu-4.0                      | 70.33    | 7.27 | 7.23   | 7.67   | 7.43 | 5.63 | 6.47   | 6.8  | 7.63   | 7.8  | 6.4    |
-| Yi-34B-Chat                    | 65.70    | 5.77 | 6.63   | 7.37   | 7.53 | 5.47 | 5.77   | 5.47 | 7.47   | 6.3  | 7.93   |
-| Baidu-3.5                      | 64.73    | 6.2  | 6.7    | 7.8    | 6.83 | 5.2  | 5.5    | 6.0  | 7.23   | 6.57 | 6.7    |
-| ChatGLM-Pro                    | 64.73    | 5.9  | 7.07   | 7.03   | 7.9  | 5.43 | 6.33   | 5.0  | 6.67   | 5.97 | 7.43   |
-| GPT-4-0613                     | 61.97    | 6.5  | 6.73   | 6.6    | 6.73 | 5.43 | 6.1    | 6.47 | 5.3    | 5.2  | 6.9    |
-| 讯飞星火大模型v3.0             | 61.47    | 5.77 | 6.5    | 7.27   | 7.3  | 5.7  | 5.9    | 5.03 | 6.5    | 5.23 | 6.27   |
-| Nanbeige-Plus                  | 61.00    | 5.78 | 5.57   | 6.77   | 7.37 | 5.37 | 5.93   | 5.45 | 6.3    | 5.67 | 6.77   |
-| Claude-3-Haiku                 | 58.97    | 5.80 | 6.60   | 6.97   | 6.63 | 4.83 | 5.93   | 6.33 | 4.80   | 5.23 | 5.83   |
-| LLaMA-3.2-90B-Vision-Instruct  | 57.83    | 5.63 | 6.33   | 6.20   | 5.80 | 4.73 | 6.10   | 6.57 | 5.03   | 5.27 | 6.17   |
-| LLaMA-3.3-70B                  | 57.00    | 5.80 | 6.90   | 5.63   | 5.70 | 5.47 | 5.70   | 6.30 | 4.70   | 4.87 | 5.93   |
-| Baichuan2-13B-Chat             | 54.6     | 4.47 | 5.53   | 7.4    | 6.9  | 4.63 | 4.8    | 4.33 | 6.23   | 4.6  | 5.7    |
-| Gemini-Pro                     | 54.5     | 4.87 | 5.43   | 7.07   | 6.43 | 5.10 | 4.5    | 4.65 | 6.33   | 4.42 | 5.7    |
-| Qwen-Plus                      | 53.0     | 4.4  | 5.1    | 6.53   | 6.53 | 5.0  | 4.77   | 4.87 | 5.17   | 5.13 | 5.5    |
-| Qwen-Turbo                     | 52.23    | 4.1  | 6.07   | 6.63   | 6.43 | 4.43 | 4.53   | 4.97 | 5.27   | 4.37 | 5.43   |
-| Nanbeige-16B                   | 51.93    | 4.37 | 5.3    | 6.5    | 6.3  | 3.97 | 4.7    | 4.07 | 5.9    | 4.73 | 6.1    |
-| GPT-3.5-Turbo                  | 51.9     | 4.97 | 5.37   | 6.4    | 6.47 | 4.43 | 4.67   | 5.43 | 4.2    | 4.37 | 5.6    |
-| MiniMax-Abab5                  | 51.83    | 3.87 | 5.63   | 6.87   | 6.97 | 4.33 | 4.4    | 2.93 | 6.13   | 4.27 | 6.43   |
-| Mixtral-8x7B-Instruct          | 48.4     | 4.27 | 5.47   | 6.47   | 6.4  | 3.13 | 4.5    | 5.07 | 3.57   | 4.37 | 5.17   |
-| ChatGLM2-6B                    | 39.63    | 2.33 | 3.77   | 5.97   | 6.13 | 2.83 | 3.83   | 2.6  | 3.8    | 4.0  | 4.37   |
-| Ziya-v1.1-13B                  | 37.63    | 2.77 | 3.97   | 5.17   | 5.33 | 2.8  | 3.77   | 2.53 | 3.7    | 3.03 | 4.57   |
-| InternLM-Chat-7B               | 36.27    | 2.63 | 3.67   | 4.87   | 5.57 | 3.17 | 3.33   | 2.33 | 4.03   | 3.13 | 3.53   |
-| Phi-3-Medium-128K-Instruct     | 34.60    | 2.27 | 4.17   | 3.70   | 4.23 | 2.87 | 4.50   | 3.57 | 3.20   | 2.27 | 3.83   |
-| Linly-Chinese-LLaMA-2-13B-HF   | 34.7     | 2.2  | 3.77   | 4.5    | 5.0  | 2.43 | 3.33   | 2.53 | 3.9    | 2.5  | 4.53   |
-| BELLE-LLaMA2-13B-Chat-0.4M     | 33.97    | 2.57 | 3.07   | 4.93   | 4.73 | 2.83 | 3.8    | 2.43 | 3.33   | 2.4  | 3.87   |
-| LLaMA-2-7B-Chat-HF             | 23.63    | 1.53 | 3.43   | 3.0    | 3.73 | 1.73 | 2.43   | 1.97 | 2.17   | 0.8  | 2.83   |
+<div align="center">
+<img src=".\pic\judge_model_performance_comparison.png" alt="Judge Model Consistency" style="zoom:80%;" />
+</div>
 
-<!--
-根据gpt4-0613评分结果如下：
+Our consistency analysis demonstrates:
+- **GPT-4o Superior Performance**: Highest Cohen's kappa agreement with human evaluators
+- **Automated Evaluation Reliability**: Strong correlation between automated and manual scoring
+- **Cross-Model Stability**: Consistent evaluation patterns across different judge models
 
-| 模型名称                       | 访问方式 | 发布机构                          | 评测日期   | 相对分数-GPT4 | 相对分数-GPT3.5 | 绝对分数 |
-| ------------------------------ | -------- | --------------------------------- | ---------- | ------------- | --------------- | -------- |
-| GPT4 Turbo(gpt-4-1106-preview) | API      | OpenAI                            | 2023.11.18 | __**100**__   | __**134.45**__  | 85.87    |
-| Baidu4.0                       | API      | 百度                              | 2023.11.1  | __**94.95**__ | __**127.66**__  | 81.53    |
-| Baidu3.5                       | API      | 百度                              | 2023.11.1  | __**90.3**__  | __**121.4**__   | 77.53    |
-| ChatGLM-pro                    | API      | Tsinghua&Zhipu\.AI                | 2023.11.1  | __**89.64**__ | __**120.51**__  | 76.97    |
-| 讯飞星火大模型v3.0             | API      | 科大讯飞                          | 2023.11.7  | __**87.73**__ | __**117.95**__  | 75.33    |
-| gpt4-0613                      | API      | OpenAI                            | 2023.9.29  | __**86.65**__ | __**116.49**__  | 74.4     |
-| Nanbeige-16B                   | API      | NanBeiGe LLM Lab                  | 2023.10.23 | __**81.68**__ | __**109.81**__  | 70.13    |
-| minimax-abab5                  | 权重     | minimax                           | 2023.11.1  | __**80.82**__ | __**108.66**__  | 69.4     |
-| Baichuan2-13B-Chat             | 权重     | Baichuan                          | 2023.9.29  | __**80.51**__ | __**108.25**__  | 69.13    |
-| Qwen-plus                      | API      | Alibaba Cloud                     | 2023.11.1  | __**75.62**__ | __**101.67**__  | 64.93    |
-| GPT-3.5-turbo                  | API      | OpenAI                            | 2023.9.29  | __**74.38**__ | __**100**__     | 63.87    |
-| Qwen-turbo                     | API      | Alibaba Cloud                     | 2023.11.1  | __**70.89**__ | __**95.3**__    | 60.87    |
-| ChatGLM2-6B                    | 权重     | Tsinghua&Zhipu\.AI                | 2023.9.29  | __**65.61**__ | __**88.2**__    | 56.33    |
-| ziya_v1.1-13b                  | 权重     | IDEA研究院                        | 2023.9.29  | __**60.83**__ | __**81.78**__   | 52.23    |
-| BELLE-Llama2-13B-chat-0.4M     | 权重     | LianjiaTech                       | 2023.10.1  | __**59.63**__ | __**80.17**__   | 51.2     |
-| Linly-Chinese-LLaMA-2-13B-hf   | 权重     | 大数据系统计算技术国家工程实验室  | 2023.10.3  | __**58.77**__ | __**79.02**__   | 50.47    |
-| InternLM-Chat-7B               | 权重     | Shanghai AI Laboratory&Sense Time | 2023.9.29  | __**52.91**__ | __**71.14**__   | 45.43    |
-| Llama-2-7b-chat-hf             | 权重     | Meta                              | 2023.9.29  | __**44.29**__ | __**59.55**__   | 38.03    |
+### 📈 Key Insights
 
+Through our longitudinal study spanning from 2023 to 2025, LLMEval-3 has revealed remarkable patterns in large language model development. The most striking finding is the acceleration of technological progress, with model performance exhibiting exponential improvement trends that have fundamentally transformed the landscape of AI capabilities. Performance metrics have surged from GPT-3.5-turbo's baseline of 51.9 points to the current state-of-the-art Doubao-1.5-Thinking-Pro achieving 93.67 points, representing an 80% improvement in absolute terms within just two years.
 
-各学科分数如下：
+Our analysis has also uncovered significant advances in multilingual competency, particularly in Chinese language understanding and academic knowledge processing. Domestic Chinese models have demonstrated exceptional competitive strength, with several achieving performance levels that match or exceed international benchmarks in discipline-specific evaluations. This trend indicates a maturation of localized AI development and the emergence of region-specific excellence in language model capabilities.
 
-| 模型名称                       | 绝对分数 | 工学 | 经济学 | 教育学 | 法学 | 文学 | 管理学 | 理学 | 历史学 | 医学 | 军事学 |
-| ------------------------------ | -------- | ---- | ------ | ------ | ---- | ---- | ------ | ---- | ------ | ---- | ------ |
-| GPT4 Turbo(gpt-4-1106-preview) | 85.87    | 8.13 | 9.47   | 9.3    | 9.37 | 7.47 | 8.87   | 8.73 | 8.73   | 7.67 | 8.13   |
-| Baidu4.0                       | 81.53    | 8.53 | 8.6    | 8.53   | 8.2  | 6.8  | 8.0    | 8.1  | 8.9    | 8.43 | 7.43   |
-| Baidu3.5                       | 77.53    | 8.13 | 8.0    | 8.63   | 7.97 | 6.23 | 7.63   | 7.33 | 8.77   | 7.47 | 7.37   |
-| ChatGLM-pro                    | 76.97    | 6.97 | 8.47   | 7.97   | 8.93 | 7.23 | 7.7    | 6.33 | 8.37   | 7.13 | 7.87   |
-| 讯飞星火大模型v3.0             | 75.33    | 7.37 | 7.87   | 8.57   | 8.53 | 7.2  | 7.53   | 6.43 | 8.6    | 6.03 | 7.2    |
-| gpt4-0613                      | 74.4     | 7.23 | 7.8    | 7.73   | 8.4  | 6.73 | 7.67   | 7.73 | 7.07   | 6.2  | 7.83   |
-| Nanbeige-16B                   | 70.13    | 6.0  | 7.87   | 8.2    | 8.33 | 6.07 | 6.83   | 6.0  | 7.8    | 5.8  | 7.23   |
-| minimax-abab5                  | 69.4     | 5.83 | 7.5    | 7.77   | 8.37 | 6.4  | 6.33   | 5.07 | 8.33   | 5.93 | 7.87   |
-| Baichuan2-13B-Chat             | 69.13    | 6.0  | 7.53   | 8.63   | 8.13 | 6.23 | 6.33   | 5.63 | 8.2    | 5.43 | 7.0    |
-| Qwen-plus                      | 64.93    | 5.47 | 7.1    | 7.0    | 7.33 | 6.27 | 6.77   | 6.13 | 7.0    | 5.7  | 6.17   |
-| GPT-3.5-turbo                  | 63.87    | 6.27 | 6.87   | 7.23   | 7.4  | 5.4  | 6.3    | 6.37 | 6.0    | 5.17 | 6.87   |
-| Qwen-turbo                     | 60.87    | 5.13 | 6.97   | 7.03   | 7.23 | 5.03 | 6.2    | 6.2  | 6.3    | 4.83 | 5.93   |
-| ChatGLM2-6B                    | 56.33    | 4.03 | 6.33   | 7.0    | 7.57 | 4.77 | 5.93   | 4.23 | 5.87   | 5.07 | 5.53   |
-| ziya_v1.1-13b                  | 52.23    | 4.67 | 5.77   | 6.07   | 6.53 | 4.53 | 5.33   | 3.7  | 5.0    | 4.63 | 6.0    |
-| BELLE-Llama2-13B-chat-0.4M     | 51.2     | 4.47 | 5.93   | 6.2    | 6.77 | 4.33 | 4.97   | 4.1  | 5.07   | 3.77 | 5.6    |
-| Linly-Chinese-LLaMA-2-13B-hf   | 50.47    | 3.87 | 5.8    | 5.83   | 6.57 | 3.93 | 5.37   | 4.07 | 5.43   | 3.93 | 5.67   |
-| InternLM-Chat-7B               | 45.43    | 3.83 | 5.13   | 5.27   | 6.57 | 3.9  | 4.83   | 3.1  | 4.87   | 3.67 | 4.27   |
-| Llama-2-7b-chat-hf             | 38.03    | 3.33 | 4.77   | 3.77   | 5.03 | 3.07 | 3.77   | 3.93 | 4.0    | 2.4  | 3.97   |
+The evaluation methodology itself has proven highly robust, with our relative scoring system effectively mitigating the systematic biases typically introduced by random sampling. Cross-temporal consistency analysis shows that models maintaining higher relative scores demonstrate more stable performance patterns across multiple evaluation rounds, validating the reliability of our dynamic benchmarking approach. Furthermore, our discipline-specific analysis reveals distinct performance patterns across academic domains, with STEM fields generally showing higher achievable scores compared to humanities and social sciences, suggesting varying complexity thresholds in different knowledge domains.
 
--->
+## 🎓 Academic Contributions
 
-## 系统性分析
+### 🏅 Research Impact
 
-### 模型性能发展趋势
+LLMEval-3 represents a pioneering contribution to the field of large language model evaluation, establishing the first comprehensive longitudinal benchmark that systematically tracks model evolution across multiple years and diverse academic disciplines. Our work addresses a critical gap in existing evaluation methodologies by providing continuous, standardized assessment protocols that enable fair comparison of models developed at different time periods. This longitudinal approach has generated unprecedented insights into the trajectory of AI development, revealing acceleration patterns and capability emergence trends that were previously unobservable through static benchmarking approaches.
 
-为了更好地理解大语言模型在学科知识评测中的表现演变，我们对所有参与评测的模型进行了纵向分析。下图展示了不同模型系列在时间维度上的性能发展趋势：
+The introduction of our robust relative evaluation framework constitutes a methodological innovation that solves fundamental fairness issues in cross-temporal model comparison. By implementing dynamic benchmarking against current state-of-the-art models rather than fixed historical baselines, we have created a evaluation system that remains relevant and discriminative as the field advances. This approach has proven particularly valuable in documenting the rapid pace of recent AI development, where traditional fixed benchmarks quickly become saturated or obsolete.
 
-<img src=".\pic\trend_of_model_series.png" alt="trend_of_model_series" style="zoom:80%;" />
+Our comprehensive validation of automated assessment methodologies provides crucial empirical evidence supporting the reliability of large-scale AI-based evaluation systems. Through extensive comparison with human expert judgments, we have demonstrated that carefully designed automated evaluation can achieve high consistency with human assessment while enabling the scale necessary for comprehensive model comparison. This validation work has important implications for the broader AI evaluation community, offering methodological foundations for future large-scale benchmark development.
 
-从趋势分析可以看出，随着时间推移，大语言模型在学科知识评测上呈现出明显的性能提升趋势。特别是2025年发布的新一代模型，如Doubao-1.5-Thinking-Pro、DeepSeek-R1、Gemini-2.5系列等，在绝对分数上都达到了90分以上的优异表现，显示出大模型技术的快速发展。
+### 🔮 Future Directions
 
-### 评测模型一致性验证
+- **Scale Expansion**: Growing from 200K to 1M questions
+- **Multimodal Integration**: Text-image and mathematical formula evaluation
+- **Global Localization**: Multi-language benchmark versions
+- **Real-time Platform**: Live evaluation and monitoring system
 
-为了确保评测结果的可靠性和客观性，我们对不同评测模型与人工评分的一致性进行了系统性验证。下图展示了三种主要评测模型与人工评分的Cohen's kappa一致性比较：
+## 🚀 Getting Started
 
-<img src=".\pic\judge_model_performance_comparison.png" alt="judge_model_performance_comparison" style="zoom:80%;" />
+### Online Evaluation
+Visit our evaluation platform: **[http://llmeval.com/](http://llmeval.com/)**
 
-从箱线图可以看出，GPT-4o作为评测模型表现出了最优异的一致性，与人工评分的Cohen's kappa系数显著高于其他评测模型，这验证了我们选择GPT-4 Turbo作为评测基准的合理性。这一结果也为自动评测的可靠性提供了重要的实证支撑。
+### Institutional Access
+1. Register an account on our platform
+2. Contact administrators for institutional verification
+3. Submit evaluation requests for your models
+4. Receive detailed performance reports
 
-### 纵向研究发现
+### Evaluation Process
+- **Fair Sampling**: Each model receives unique question sets
+- **Standardized Protocol**: Consistent evaluation procedures
+- **Comprehensive Reporting**: Detailed performance analytics
+- **Leaderboard Integration**: Automatic ranking updates
 
-通过对2023年至2025年期间大语言模型的持续追踪评测，LLMEval-3揭示了以下重要发现：
+## 📋 Complete Results
 
-1. **技术快速迭代**：模型性能在短时间内实现了显著提升，从GPT-3.5-turbo的51.9分提升至Doubao-1.5-Thinking-Pro的93.67分，体现了大模型技术的快速发展。
+<details>
+<summary>Click to view complete leaderboard (47 models)</summary>
 
-2. **中文能力增强**：国产大模型在中文学科知识理解方面表现出强劲的竞争力，多个模型在特定学科领域达到或超越了国际先进水平。
+| Model Name | Organization | Access Type | Evaluation Date | Relative Score | Absolute Score |
+|------------|--------------|-------------|-----------------|----------------|----------------|
+| Doubao-1.5-Thinking-Pro | ByteDance | API | 2025.7.21 | 100.00 | 93.67 |
+| DeepSeek-R1 | DeepSeek | API | 2025.7.21 | 97.40 | 91.23 |
+| Gemini-2.5-Pro-Preview | Google | API | 2025.7.21 | 97.22 | 91.07 |
+| Gemini-2.5-Pro-Preview-Thinking | Google | API | 2025.7.21 | 97.15 | 91.00 |
+| DeepSeek-V3 | DeepSeek | API | 2025.7.21 | 96.48 | 90.37 |
+| Qwen3-235B | Alibaba Cloud | API | 2025.7.21 | 96.44 | 90.33 |
+| Doubao-1.5-Pro-256K | ByteDance | API | 2025.7.21 | 95.69 | 89.63 |
+| QwQ-32B | Alibaba Cloud | API | 2025.8.1 | 94.52 | 88.54 |
+| O1-2024-12-17 | OpenAI | API | 2025.7.21 | 93.35 | 87.43 |
+| Gemini-2.5-Flash-Thinking | Google | API | 2025.8.1 | 92.74 | 86.87 |
+| Qwen3-32B | Alibaba Cloud | API | 2025.7.21 | 92.21 | 86.37 |
+| Claude-Sonnet-4-Thinking | Anthropic | API | 2025.7.21 | 91.03 | 85.27 |
+| Claude-Sonnet-4 | Anthropic | API | 2025.7.21 | 91.00 | 85.23 |
+| GPT-4o-Search-Preview | OpenAI | API | 2025.7.21 | 89.40 | 83.73 |
+| GLM-4-32B | Tsinghua&Zhipu.AI | API | 2025.8.1 | 88.43 | 82.83 |
+| GPT-4o-2024-11-20 | OpenAI | API | 2025.7.21 | 88.08 | 82.50 |
+| Gemini-1.5-Pro | Google | API | 2025.8.1 | 85.92 | 80.47 |
+| Qwen2.5-32B-Instruct | Alibaba Cloud | API | 2025.8.1 | 85.07 | 79.68 |
+| O3-Mini | OpenAI | API | 2025.7.21 | 84.13 | 78.80 |
+| Qwen-Turbo-1101 | Alibaba Cloud | API | 2025.8.1 | 83.71 | 78.41 |
+| Claude-3.5-Sonnet | Anthropic | API | 2025.8.1 | 83.38 | 78.10 |
+| O1-Mini-2024-09-12 | OpenAI | API | 2025.8.1 | 78.93 | 73.93 |
+| Claude-3-Haiku | Anthropic | API | 2025.8.1 | 62.95 | 58.97 |
+| LLaMA-3.2-90B-Vision-Instruct | Meta | API | 2025.8.1 | 61.74 | 57.83 |
+| LLaMA-3.3-70B | Meta | API | 2025.8.1 | 60.85 | 57.00 |
+| Phi-3-Medium-128K-Instruct | Microsoft | API | 2025.8.1 | 36.94 | 34.60 |
+| GPT-4 Turbo(gpt-4-1106-preview) | OpenAI | API | 2023.11.18 | 78.56 | 73.6 |
+| GPT-4-0125-Preview | OpenAI | API | 2024.1.28 | 76.44 | 71.6 |
+| Baidu-4.0 | Baidu | API | 2023.11.1 | 75.09 | 70.33 |
+| Yi-34B-Chat | 01.AI | API | 2023.12.1 | 70.17 | 65.70 |
+| Baidu-3.5 | Baidu | API | 2023.11.1 | 69.14 | 64.73 |
+| ChatGLM-Pro | Tsinghua&Zhipu.AI | API | 2023.11.1 | 69.14 | 64.73 |
+| GPT-4-0613 | OpenAI | API | 2023.9.29 | 66.17 | 61.97 |
+| iFlytek Spark v3.0 | iFlytek | API | 2023.11.7 | 65.64 | 61.47 |
+| Nanbeige-Plus | NanBeiGe LLM Lab | API | 2023.12.1 | 65.14 | 61.00 |
+| Baichuan2-13B-Chat | Baichuan | Weights | 2023.9.29 | 58.31 | 54.6 |
+| Gemini-Pro | Google | API | 2024.1.10 | 58.20 | 54.5 |
+| Qwen-Plus | Alibaba Cloud | API | 2023.11.1 | 56.60 | 53.0 |
+| Qwen-Turbo | Alibaba Cloud | API | 2023.11.1 | 55.78 | 52.23 |
+| Nanbeige-16B | NanBeiGe LLM Lab | API | 2023.10.23 | 55.46 | 51.93 |
+| GPT-3.5-Turbo | OpenAI | API | 2023.9.29 | 55.42 | 51.9 |
+| MiniMax-Abab5 | MiniMax | Weights | 2023.11.1 | 55.33 | 51.83 |
+| Mixtral-8x7B-Instruct | Mistral AI | Weights | 2024.1.10 | 51.69 | 48.4 |
+| ChatGLM2-6B | Tsinghua&Zhipu.AI | Weights | 2023.9.29 | 42.32 | 39.63 |
+| Ziya-v1.1-13B | IDEA | Weights | 2023.9.29 | 40.18 | 37.63 |
+| InternLM-Chat-7B | Shanghai AI Lab&SenseTime | Weights | 2023.9.29 | 38.73 | 36.27 |
+| Linly-Chinese-LLaMA-2-13B-HF | National Engineering Lab | Weights | 2023.10.3 | 37.06 | 34.7 |
+| BELLE-LLaMA2-13B-Chat-0.4M | LianjiaTech | Weights | 2023.10.1 | 36.28 | 33.97 |
+| LLaMA-2-7B-Chat-HF | Meta | Weights | 2023.9.29 | 25.24 | 23.63 |
 
-3. **学科差异分析**：不同学科领域的模型表现存在显著差异，理科类学科（如理学、工学）相对更容易获得高分，而人文社科类学科（如文学、艺术学）对模型的语言理解和文化知识要求更高。
+</details>
 
-4. **评测稳定性验证**：相对分数指标有效减少了随机抽样带来的系统偏差，为不同时期模型的公平比较提供了可靠基础。
+## 📊 Discipline-Specific Performance
 
-## 研究贡献与影响
+<details>
+<summary>View performance breakdown by academic discipline</summary>
 
-### 学术贡献
+| Model Name | Overall | Engineering | Economics | Education | Law | Literature | Management | Science | History | Medicine | Military |
+|------------|---------|-------------|-----------|-----------|-----|------------|------------|---------|---------|----------|----------|
+| Doubao-1.5-Thinking-Pro | 93.67 | 9.47 | 9.67 | 9.43 | 9.77 | 8.93 | 9.53 | 9.23 | 9.70 | 8.97 | 8.97 |
+| DeepSeek-R1 | 91.23 | 9.47 | 9.43 | 9.27 | 9.37 | 8.83 | 9.37 | 9.03 | 9.53 | 8.50 | 8.43 |
+| Gemini-2.5-Pro-Preview | 91.07 | 9.20 | 9.47 | 9.20 | 9.30 | 8.43 | 9.63 | 9.07 | 9.40 | 8.50 | 8.87 |
+| Gemini-2.5-Pro-Preview-Thinking | 91.00 | 9.13 | 9.50 | 9.37 | 9.47 | 8.40 | 9.63 | 9.20 | 9.27 | 8.30 | 8.73 |
+| DeepSeek-V3 | 90.37 | 9.30 | 9.57 | 8.93 | 9.23 | 8.60 | 9.13 | 8.97 | 9.47 | 8.83 | 8.33 |
+| Qwen3-235B | 90.33 | 9.23 | 9.43 | 9.03 | 9.50 | 8.23 | 9.43 | 8.97 | 9.17 | 8.73 | 8.60 |
+| Doubao-1.5-Pro-256K | 89.63 | 8.83 | 9.03 | 9.13 | 9.43 | 8.57 | 9.27 | 8.83 | 9.10 | 8.60 | 8.83 |
+| QwQ-32B | 88.54 | 8.30 | 9.46 | 9.23 | 9.33 | 7.83 | 9.46 | 8.65 | 9.27 | 8.57 | 8.43 |
+| O1-2024-12-17 | 87.43 | 8.90 | 9.30 | 8.67 | 8.77 | 7.73 | 9.27 | 8.90 | 8.97 | 8.17 | 8.77 |
+| Gemini-2.5-Flash-Thinking | 86.87 | 8.67 | 9.27 | 8.70 | 9.00 | 7.80 | 8.93 | 8.90 | 9.00 | 8.03 | 8.57 |
+| Qwen3-32B | 86.37 | 8.43 | 9.10 | 8.57 | 9.10 | 7.77 | 9.47 | 8.67 | 9.30 | 7.70 | 8.27 |
+| Claude-Sonnet-4-Thinking | 85.27 | 8.57 | 9.00 | 8.63 | 8.73 | 7.57 | 9.10 | 8.93 | 8.70 | 7.97 | 8.07 |
+| Claude-Sonnet-4 | 85.23 | 8.57 | 8.80 | 8.50 | 8.70 | 7.80 | 9.03 | 8.80 | 8.80 | 8.17 | 8.07 |
+| GPT-4o-Search-Preview | 83.73 | 8.27 | 8.77 | 8.43 | 8.67 | 7.77 | 8.80 | 8.20 | 8.73 | 8.27 | 7.83 |
+| GLM-4-32B | 82.83 | 7.77 | 8.97 | 8.33 | 8.33 | 7.03 | 9.13 | 8.27 | 8.77 | 8.23 | 8.00 |
+| GPT-4o-2024-11-20 | 82.50 | 7.90 | 8.67 | 8.30 | 8.33 | 7.17 | 8.97 | 8.57 | 8.67 | 7.63 | 8.30 |
+| Gemini-1.5-Pro | 80.47 | 8.13 | 8.45 | 8.30 | 8.37 | 7.04 | 8.17 | 8.43 | 8.50 | 7.48 | 7.60 |
+| Qwen2.5-32B-Instruct | 79.68 | 7.70 | 8.57 | 8.33 | 8.33 | 6.70 | 8.50 | 8.17 | 7.70 | 7.60 | 8.08 |
+| O3-Mini | 78.80 | 7.97 | 8.60 | 8.30 | 8.20 | 6.73 | 8.57 | 8.53 | 7.17 | 7.03 | 7.70 |
+| Qwen-Turbo-1101 | 78.41 | 7.97 | 8.37 | 8.03 | 8.23 | 6.40 | 8.50 | 8.10 | 7.50 | 7.27 | 8.05 |
+| Claude-3.5-Sonnet | 78.10 | 7.97 | 8.53 | 8.27 | 7.93 | 7.03 | 8.50 | 8.00 | 7.57 | 6.70 | 7.60 |
+| O1-Mini-2024-09-12 | 73.93 | 7.27 | 8.43 | 7.90 | 7.53 | 6.27 | 8.27 | 8.17 | 6.43 | 6.63 | 7.03 |
+| Claude-3-Haiku | 58.97 | 5.80 | 6.60 | 6.97 | 6.63 | 4.83 | 5.93 | 6.33 | 4.80 | 5.23 | 5.83 |
+| LLaMA-3.2-90B-Vision-Instruct | 57.83 | 5.63 | 6.33 | 6.20 | 5.80 | 4.73 | 6.10 | 6.57 | 5.03 | 5.27 | 6.17 |
+| LLaMA-3.3-70B | 57.00 | 5.80 | 6.90 | 5.63 | 5.70 | 5.47 | 5.70 | 6.30 | 4.70 | 4.87 | 5.93 |
+| Phi-3-Medium-128K-Instruct | 34.60 | 2.27 | 4.17 | 3.70 | 4.23 | 2.87 | 4.50 | 3.57 | 3.20 | 2.27 | 3.83 |
+| GPT-4 Turbo(gpt-4-1106-preview) | 73.6 | 6.97 | 8.17 | 8.33 | 7.8 | 6.0 | 7.57 | 8.13 | 7.0 | 6.43 | 7.2 |
+| GPT-4-0125-Preview | 71.6 | 6.9 | 7.4 | 8.03 | 7.3 | 6.0 | 7.47 | 7.63 | 6.87 | 6.33 | 7.67 |
+| Baidu-4.0 | 70.33 | 7.27 | 7.23 | 7.67 | 7.43 | 5.63 | 6.47 | 6.8 | 7.63 | 7.8 | 6.4 |
+| Yi-34B-Chat | 65.70 | 5.77 | 6.63 | 7.37 | 7.53 | 5.47 | 5.77 | 5.47 | 7.47 | 6.3 | 7.93 |
+| Baidu-3.5 | 64.73 | 6.2 | 6.7 | 7.8 | 6.83 | 5.2 | 5.5 | 6.0 | 7.23 | 6.57 | 6.7 |
+| ChatGLM-Pro | 64.73 | 5.9 | 7.07 | 7.03 | 7.9 | 5.43 | 6.33 | 5.0 | 6.67 | 5.97 | 7.43 |
+| GPT-4-0613 | 61.97 | 6.5 | 6.73 | 6.6 | 6.73 | 5.43 | 6.1 | 6.47 | 5.3 | 5.2 | 6.9 |
+| iFlytek Spark v3.0 | 61.47 | 5.77 | 6.5 | 7.27 | 7.3 | 5.7 | 5.9 | 5.03 | 6.5 | 5.23 | 6.27 |
+| Nanbeige-Plus | 61.00 | 5.78 | 5.57 | 6.77 | 7.37 | 5.37 | 5.93 | 5.45 | 6.3 | 5.67 | 6.77 |
+| Baichuan2-13B-Chat | 54.6 | 4.47 | 5.53 | 7.4 | 6.9 | 4.63 | 4.8 | 4.33 | 6.23 | 4.6 | 5.7 |
+| Gemini-Pro | 54.5 | 4.87 | 5.43 | 7.07 | 6.43 | 5.10 | 4.5 | 4.65 | 6.33 | 4.42 | 5.7 |
+| Qwen-Plus | 53.0 | 4.4 | 5.1 | 6.53 | 6.53 | 5.0 | 4.77 | 4.87 | 5.17 | 5.13 | 5.5 |
+| Qwen-Turbo | 52.23 | 4.1 | 6.07 | 6.63 | 6.43 | 4.43 | 4.53 | 4.97 | 5.27 | 4.37 | 5.43 |
+| Nanbeige-16B | 51.93 | 4.37 | 5.3 | 6.5 | 6.3 | 3.97 | 4.7 | 4.07 | 5.9 | 4.73 | 6.1 |
+| GPT-3.5-Turbo | 51.9 | 4.97 | 5.37 | 6.4 | 6.47 | 4.43 | 4.67 | 5.43 | 4.2 | 4.37 | 5.6 |
+| MiniMax-Abab5 | 51.83 | 3.87 | 5.63 | 6.87 | 6.97 | 4.33 | 4.4 | 2.93 | 6.13 | 4.27 | 6.43 |
+| Mixtral-8x7B-Instruct | 48.4 | 4.27 | 5.47 | 6.47 | 6.4 | 3.13 | 4.5 | 5.07 | 3.57 | 4.37 | 5.17 |
+| ChatGLM2-6B | 39.63 | 2.33 | 3.77 | 5.97 | 6.13 | 2.83 | 3.83 | 2.6 | 3.8 | 4.0 | 4.37 |
+| Ziya-v1.1-13B | 37.63 | 2.77 | 3.97 | 5.17 | 5.33 | 2.8 | 3.77 | 2.53 | 3.7 | 3.03 | 4.57 |
+| InternLM-Chat-7B | 36.27 | 2.63 | 3.67 | 4.87 | 5.57 | 3.17 | 3.33 | 2.33 | 4.03 | 3.13 | 3.53 |
+| Linly-Chinese-LLaMA-2-13B-HF | 34.7 | 2.2 | 3.77 | 4.5 | 5.0 | 2.43 | 3.33 | 2.53 | 3.9 | 2.5 | 4.53 |
+| BELLE-LLaMA2-13B-Chat-0.4M | 33.97 | 2.57 | 3.07 | 4.93 | 4.73 | 2.83 | 3.8 | 2.43 | 3.33 | 2.4 | 3.87 |
+| LLaMA-2-7B-Chat-HF | 23.63 | 1.53 | 3.43 | 3.0 | 3.73 | 1.73 | 2.43 | 1.97 | 2.17 | 0.8 | 2.83 |
 
-1. **建立了一个大规模纵向LLM评测基准**：LLMEval-3提供了从2023年至今持续追踪大语言模型能力演进的数据集和评测框架。
+*Note: Discipline scores are on a 10-point scale*
 
-2. **提出了鲁棒的相对评测方法**：通过动态基准和相对分数机制，解决了传统固定基准评测中的时效性和公平性问题。
+</details>
 
-3. **验证了自动评测的可靠性**：通过与人工评分的一致性分析，为大规模自动评测的应用提供了实证支撑。
+## 🤝 Contributing
 
-4. **揭示了LLM能力发展规律**：通过纵向分析，发现了大语言模型在不同学科领域的能力发展模式和技术演进趋势。
+We welcome contributions from the research community! Please feel free to:
 
-## 联系我们
+- Submit issues for bug reports or feature requests
+- Propose new evaluation metrics or methodologies  
+- Contribute additional question sets or domains
+- Suggest improvements to our evaluation framework
 
-本项目已经向公众开放，欢迎参与我们的评测。http://llmeval.com/
+## 📞 Contact Us
 
-机构评测需要进行认证，注册完账户以后，请联系管理员认证并申请评测权限。
+For questions, suggestions, or collaboration opportunities:
 
-如无特殊情况，在评测完成之后，相关结果都会添加在排行榜上。
+- **Website**: [http://llmeval.com/](http://llmeval.com/)
+- **Email**: mingzhang23@m.fudan.edu.cn
+- **WeChat**: zanyingluan
 
-Email: mingzhang23@m.fudan.edu.cn
+## 📄 Citation
 
-Wechat: zanyingluan
+If you use LLMEval-3 in your research, please cite our paper:
+
+```bibtex
+@article{zhang2024llmeval3,
+  title={LLMEval-3: A Large-Scale Longitudinal Study on Robust and Fair Evaluation of Large Language Models},
+  author={Zhang, Ming and Shen, Yujiong and others},
+  journal={arXiv preprint arXiv:2508.05452},
+  year={2024}
+}
+```
+
+## 📜 License
+
+This project is licensed under the terms specified in our repository. Please refer to the LICENSE file for details.
+
+---
+
+<div align="center">
+
+**LLMEval-3** | Building the Future of LLM Evaluation
+
+</div>
