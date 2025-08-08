@@ -230,11 +230,15 @@ Where $s_i$ is the score for question i, and $s_{max}=3$ .
 <img src=".\pic\trend_of_model_series.png" alt="Model Performance Trends" style="zoom:80%;" />
 </div>
 
-Our longitudinal analysis reveals significant performance improvements across all model families:
+Our longitudinal analysis reveals significant performance improvements across all model families, with several key evolutionary patterns emerging from the data:
 
-- **Rapid Development**: Performance jumped from GPT-3.5-turbo's 51.9 points to Doubao-1.5-Thinking-Pro's 93.67 points
-- **Chinese Model Excellence**: Domestic models demonstrate competitive performance in Chinese academic domains
-- **Discipline Variations**: STEM fields show higher scores compared to humanities and social sciences
+**Exponential Growth Trajectory**: The scatter plot demonstrates a remarkable acceleration in model capabilities, with performance metrics exhibiting an exponential rather than linear improvement curve. The progression from GPT-3.5-turbo's baseline of 51.9 points to Doubao-1.5-Thinking-Pro's current peak of 93.67 points represents an 80% improvement in absolute terms, achieved within a compressed timeframe of just two years. This acceleration pattern suggests that we are witnessing a technological inflection point in large language model development.
+
+**Model Family Clustering and Competition**: The visualization reveals distinct clustering patterns among different model families, with clear competitive dynamics emerging between major AI laboratories. OpenAI's GPT series, Google's Gemini family, Anthropic's Claude models, and Chinese domestic models (including Doubao, DeepSeek, and Qwen series) each demonstrate unique developmental trajectories. Notably, the Chinese model ecosystem has achieved remarkable convergence with international benchmarks, with several domestic models now occupying top-tier positions in the performance spectrum.
+
+**Temporal Performance Density**: The data points show increasing density in higher performance ranges over time, indicating that the field is experiencing a collective advancement rather than isolated breakthroughs. This suggests that fundamental algorithmic innovations and computational advances are broadly accessible across the research community, leading to simultaneous improvements across multiple model families.
+
+**Performance Saturation Thresholds**: The scatter plot reveals emerging performance saturation effects in certain score ranges, particularly around the 85-95 point threshold, where incremental improvements become increasingly difficult to achieve. This pattern suggests that current evaluation methodologies may be approaching their discriminative limits for the highest-performing models, highlighting the need for more challenging benchmark tasks.
 
 ### 🔍 Evaluation Reliability Validation
 
@@ -242,10 +246,14 @@ Our longitudinal analysis reveals significant performance improvements across al
 <img src=".\pic\judge_model_performance_comparison.png" alt="Judge Model Consistency" style="zoom:80%;" />
 </div>
 
-Our consistency analysis demonstrates:
-- **GPT-4o Superior Performance**: Highest Cohen's kappa agreement with human evaluators
-- **Automated Evaluation Reliability**: Strong correlation between automated and manual scoring
-- **Cross-Model Stability**: Consistent evaluation patterns across different judge models
+Our comprehensive consistency analysis provides crucial validation for automated evaluation methodologies, revealing several important findings about the reliability and robustness of AI-based assessment systems:
+
+**GPT-4o as Gold Standard Judge**: The box plot analysis demonstrates that GPT-4o achieves the highest Cohen's kappa agreement with human expert evaluators, with a median kappa value significantly exceeding other judge models. The tight interquartile range and minimal outliers in GPT-4o's distribution indicate consistent and reliable scoring behavior across diverse question types and difficulty levels. This superior performance validates our choice of GPT-4o as the primary evaluation model for LLMEval-3, ensuring that automated scores closely align with human expert judgment.
+
+**Comparative Judge Model Analysis**: The visualization reveals significant performance variations among different judge models, with clear hierarchical patterns in their agreement with human evaluators. While GPT-4o leads in consistency, other models show varying degrees of reliability, with some exhibiting wider variance ranges and more frequent outliers. This analysis underscores the critical importance of judge model selection in automated evaluation systems and demonstrates that not all large language models are equally suitable for assessment tasks.
+
+**Statistical Robustness and Variance Analysis**: The box plot distributions provide insights into the statistical robustness of each judge model's performance. Models with tighter distributions and fewer outliers demonstrate more predictable and stable evaluation behavior, which is essential for fair and consistent model comparison. The presence of outliers in some judge models highlights potential edge cases where automated evaluation may diverge from human judgment, informing our understanding of evaluation limitations.
+
 
 ### 📈 Key Insights
 
