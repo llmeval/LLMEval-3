@@ -1,5 +1,5 @@
 <div align="center">
-<h2>LLMEval-3: 大语言模型鲁棒性和公平性评测的大规模纵向研究</h2>
+<h2>LLMEval-3: A Large-Scale Longitudinal Study on Robust and Fair Evaluation of Large Language Models</h2>
 
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-blue.svg?style=for-the-badge)](https://arxiv.org/abs/2508.05452)
 [![Website](https://img.shields.io/badge/Website-LLMEval-green.svg?style=for-the-badge)](http://llmeval.com/)
