@@ -215,7 +215,7 @@ The absolute score represents the model's raw performance on N=1,000 questions, 
 
 $$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
 
-Where $s_i$ is the score for question i, and $ {s_{max}} = 3$.
+Where $s_i$ is the score for question i, and $s_{max} = 3$.
 
 **Scoring Notes:** 
 - $S_{model}$ represents absolute score (0-100 scale)

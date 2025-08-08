@@ -217,7 +217,7 @@ $$R_{\text{SOTA}}^{\text{model}}=\frac{S_{model}}{S_\text{sotamodel}} \times 100
 
 $$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
 
-其中 $s_i$ 为第i题得分，$ {s_{max}}  = 3$。
+其中 $s_i$ 为第i题得分，$s_{max} = 3$。
 
 **评分说明：** $S_{\text{model}}$为绝对分数（0-100量表），$R_{\text{SOTA}}^{\text{model}}$为相对分数（以SOTA模型为100%基准），各学科分数采用10分制量表。
 
