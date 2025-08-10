@@ -2,7 +2,7 @@
 <h2>LLMEval-3: A Large-Scale Longitudinal Study on Robust and Fair Evaluation of Large Language Models</h2>
 
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-blue.svg?style=for-the-badge)](https://arxiv.org/abs/2508.05452)
-[![Website](https://img.shields.io/badge/Website-LLMEval-green.svg?style=for-the-badge)](http://llmeval.com/)
+
 
 </div>
 
@@ -12,46 +12,67 @@
 
 > **Note:** For the Chinese version of this README, please refer to [README_zh.md](README_zh.md).
 
-## 📚 Overview
+## 📚 Benchmark Content and Format
 
-LLMEval-3 is a comprehensive, large-scale longitudinal benchmark designed for **robust and fair evaluation** of Large Language Models (LLMs) across diverse academic disciplines. As the field of LLMs evolves rapidly, LLMEval-3 provides a dynamic evaluation framework that tracks model capabilities over time, ensuring consistent and reliable assessment of model performance from 2023 to present.
-
-Our benchmark covers **13 major academic disciplines** as defined by the Ministry of Education, including Philosophy, Economics, Law, Education, Literature, History, Science, Engineering, Agriculture, Medicine, Military Science, Management, and Arts, with over **50 sub-disciplines** and approximately **200,000 questions** (expanding to 1 million).
+LLMEval-3 focuses on evaluating professional knowledge capabilities, covering 13 academic disciplines as defined by the Ministry of Education: Philosophy, Economics, Law, Education, Literature, History, Science, Engineering, Agriculture, Medicine, Military Science, Management, and Arts. It includes over 50 sub-disciplines and a total of approximately 200,000 standardized generative question-answering items (we will continue to expand the question bank to 1 million).
 
 <div align="center">
 <img src=".\pic\subjects.PNG" alt="Academic Disciplines Coverage" style="zoom:80%;" />
 </div>
 
-## 🎯 Key Features
+Question sources mainly include **undergraduate homework**, **undergraduate mid-term and final exams**, and **graduate entrance exams**. To prevent large models from being exposed to a significant portion of the evaluation data during pre-training, LLMEval-3 sources its questions from non-public channels where possible. The data is in PDF and Word formats, which undergo OCR and data cleaning before being formatted. A standardized interface is provided for different question types to enable a fully automated process for the models under test.
 
-### 🛡️ Robust Evaluation Design
-- **Dynamic Sampling**: Random selection of 1,000 questions per evaluation to prevent overfitting
-- **Anti-Cheating Mechanisms**: Multi-layered protection against unfair practices
-- **Online Sequential Testing**: Questions sent serially to prevent batch crawling
+Unlike other knowledge benchmarks that use a multiple-choice format, LLMEval-3 treats all questions as **generative knowledge question-answering**. It includes a variety of formats such as short answer, calculation, true/false, analysis, and essay questions. Compared to standardized multiple-choice questions, the generative format used in LLMEval-3 better reflects real-world user needs and the language capabilities of the models.
 
-### ⚖️ Fair Assessment Framework  
-- **Relative Scoring System**: Dynamic benchmarking against current SOTA models
-- **Absolute Performance Metrics**: Consistent 0-100 scale scoring
-- **Temporal Consistency**: Ensures fair comparison across different time periods
+## 🔬 Methodology
 
-### 📈 Longitudinal Analysis
-- **Continuous Tracking**: Model performance evolution from 2023 to present
-- **Trend Analysis**: Comprehensive insights into LLM capability development
-- **Cross-Model Comparison**: Standardized evaluation across different model families
+### Evaluation Pipeline
+
+Preventing cheating is a key consideration for LLMEval-3. Existing public benchmarks suffer from test set leakage, which can lead to unfair practices like "leaderboard hacking" or score inflation. In LLMEval-3, each participating system must complete 1,000 questions randomly sampled from the total question bank. **For models from the same institution, we ensure that the questions are not repeated in subsequent evaluations**. The evaluation is conducted online, with questions sent sequentially in a single round; the next question is only sent after the previous one has been answered, preventing malicious crawling.
+
+This round of evaluation uses an automated scoring method, with GPT-4 Turbo as the current evaluation model. Each question is scored on a scale of 0-3 points. The scoring focuses on the core correctness of the answer and the validity of the explanation, with core correctness being the primary metric. The evaluation prompt used is as follows:
+
+```text
+Please evaluate the following response from the LLM regarding a discipline-specific question based on the following criteria. You must score it on a scale of 0, 1, 2 or 3 stars:
+
+Overall Rating:
+0 stars indicate wrong answer with a wrong explanation
+1 star indicates wrong answer but a partially reasonable explanation
+2 stars indicate a correct answer with a partially reasonable explanation
+3 stars indicate a correct answer with a reasonable explanation
+
+User: {question}
+
+LLM:{answer_from_llm}
+
+The correct answer to user's question is: {correct_answer}
+
+You must provide your feedback in the following format:
+{"Overall Rating":numbers of its stars(int)}
+```
+
+### Scoring
+
+To mitigate systematic bias introduced by randomly sampling 1,000 questions, LLMEval-3 uses both **relative scores** and **absolute scores**.
+
+**Relative Score Calculation:**
+Given the rapid development of large language model technology, we introduce a relative score to measure the gap between a model and the current state-of-the-art performance. We select the top-performing model on the leaderboard as the SOTA baseline, which is currently Doubao-1.5-Thinking-Pro:
+
+$$R_{\text{SOTA}}^{\text{model}}=\frac{S_{model}}{S_\text{sotamodel}} \times 100 $$
+
+**Absolute Score Calculation:**
+The absolute score represents the model's raw performance on N=1,000 questions. It is calculated by normalizing each question's score (0-3 points) to a 0-100 scale:
+
+$$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
+
+Where $s_i$ is the score for question i, and $s_{max}=3$.
+
+**Scoring Notes:** $S_{model}$ is the absolute score (0-100 scale), $R_{\text{SOTA}}^{\text{model}}$ is the relative score (with the SOTA model as the 100% baseline), and discipline-specific scores use a 10-point scale.
+
 
 ## 🏆 Current Leaderboard (As of August 2025)
 
-### Top Performing Models
-
-| Model Name | Organization | Access Type | Evaluation Date | Relative Score (SOTA=100%) | Absolute Score |
-|------------|--------------|-------------|-----------------|----------------------------|----------------|
-| **Doubao-1.5-Thinking-Pro** | ByteDance | API | 2025.7.21 | **100.00** | 93.67 |
-| **DeepSeek-R1** | DeepSeek | API | 2025.7.21 | **97.40** | 91.23 |
-| **Gemini-2.5-Pro-Preview** | Google | API | 2025.7.21 | **97.22** | 91.07 |
-| **Gemini-2.5-Pro-Preview-Thinking** | Google | API | 2025.7.21 | **97.15** | 91.00 |
-| **DeepSeek-V3** | DeepSeek | API | 2025.7.21 | **96.48** | 90.37 |
-
-### 📋 Complete Results (47 Models)
+### 📋 Overall Scores
 
 | Model Name | Organization | Access Type | Evaluation Date | Relative Score | Absolute Score |
 |------------|--------------|-------------|-----------------|----------------|----------------|
@@ -161,158 +182,22 @@ Our benchmark covers **13 major academic disciplines** as defined by the Ministr
 
 *Note: Discipline scores are on a 10-point scale*
 
-## 🔬 Methodology
-
-### Evaluation Pipeline
-
-1. **Question Generation**: Curated from authoritative academic sources
-   - Undergraduate coursework and exams
-   - Graduate entrance examinations  
-   - Professional certification materials
-
-2. **Anti-Contamination Measures**:
-   - Non-public data sources (PDF/Word documents)
-   - OCR processing and data cleaning
-   - Standardized formatting protocols
-
-3. **Assessment Protocol**:
-   - **Generative QA Format**: All questions converted to open-ended responses
-   - **Automated Scoring**: GPT-4 Turbo as evaluation model
-   - **4-Point Scale**: 0-3 scoring based on correctness and explanation quality
-
-### 📋 Evaluation Prompt
-
-```text
-Please evaluate the following response from the LLM regarding a discipline-specific question based on the following criteria. You must score it on a scale of 0, 1, 2 or 3 stars:
-
-Overall Rating:
-0 stars indicate wrong answer with a wrong explanation
-1 star indicates wrong answer but a partially reasonable explanation
-2 stars indicate a correct answer with a partially reasonable explanation
-3 stars indicate a correct answer with a reasonable explanation
-
-User: {question}
-
-LLM:{answer_from_llm}
-
-The correct answer to user's question is: {correct_answer}
-
-You must provide your feedback in the following format:
-{"Overall Rating":numbers of its stars(int)}
-```
-
-### Scoring Methodology
-
-To mitigate systematic bias introduced by random sampling of 1,000 questions, LLMEval-3 employs both **relative scores** and **absolute scores**.
-
-**Relative Score Calculation:**
-Given the rapid development of LLM technology, we introduce relative scores to measure the gap between models and current best performance. We select the top-performing model on the leaderboard as the SOTA baseline, currently Doubao-1.5-Thinking-Pro:
-
-$$R_{\text{SOTA}}^{\text{model}}=\frac{S_{model}}{S_\text{sotamodel}} \times 100 $$
-
-**Absolute Score Calculation:**
-The absolute score represents the model's raw performance on N=1,000 questions, calculated by normalizing each question's score (0-3 points) to a 0-100 scale:
-
-$$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
-
-Where $s_i$ is the score for question i, and $s_{max}=3$ .
-
-**Scoring Notes:** 
-- $S_{model}$ represents absolute score (0-100 scale)
-- $R_{\text{SOTA}}^{\text{model}}$ represents relative score (with SOTA model as 100% baseline)
-- Discipline-specific scores use a 10-point scale
-
-## 📊 Research Findings
-
-### 🚀 Model Performance Evolution
+The performance distribution over time for the currently ranked models is shown in the figure below:
 
 <div align="center">
 <img src=".\pic\trend_of_model_series.png" alt="Model Performance Trends" style="zoom:80%;" />
 </div>
 
-Our longitudinal analysis reveals significant performance improvements across all model families, with several key evolutionary patterns emerging from the data:
+For more experimental details and analysis, please refer to our [paper](https://arxiv.org/abs/2508.05452).
 
-**Exponential Growth Trajectory**: The scatter plot demonstrates a remarkable acceleration in model capabilities, with performance metrics exhibiting an exponential rather than linear improvement curve. The progression from GPT-3.5-turbo's baseline of 51.9 points to Doubao-1.5-Thinking-Pro's current peak of 93.67 points represents an 80% improvement in absolute terms, achieved within a compressed timeframe of just two years. This acceleration pattern suggests that we are witnessing a technological inflection point in large language model development.
-
-**Model Family Clustering and Competition**: The visualization reveals distinct clustering patterns among different model families, with clear competitive dynamics emerging between major AI laboratories. OpenAI's GPT series, Google's Gemini family, Anthropic's Claude models, and Chinese domestic models (including Doubao, DeepSeek, and Qwen series) each demonstrate unique developmental trajectories. Notably, the Chinese model ecosystem has achieved remarkable convergence with international benchmarks, with several domestic models now occupying top-tier positions in the performance spectrum.
-
-**Temporal Performance Density**: The data points show increasing density in higher performance ranges over time, indicating that the field is experiencing a collective advancement rather than isolated breakthroughs. This suggests that fundamental algorithmic innovations and computational advances are broadly accessible across the research community, leading to simultaneous improvements across multiple model families.
-
-**Performance Saturation Thresholds**: The scatter plot reveals emerging performance saturation effects in certain score ranges, particularly around the 85-95 point threshold, where incremental improvements become increasingly difficult to achieve. This pattern suggests that current evaluation methodologies may be approaching their discriminative limits for the highest-performing models, highlighting the need for more challenging benchmark tasks.
-
-### 🔍 Evaluation Reliability Validation
-
-<div align="center">
-<img src=".\pic\judge_model_performance_comparison.png" alt="Judge Model Consistency" style="zoom:80%;" />
-</div>
-
-Our comprehensive consistency analysis provides crucial validation for automated evaluation methodologies, revealing several important findings about the reliability and robustness of AI-based assessment systems:
-
-**GPT-4o as Gold Standard Judge**: The box plot analysis demonstrates that GPT-4o achieves the highest Cohen's kappa agreement with human expert evaluators, with a median kappa value significantly exceeding other judge models. The tight interquartile range and minimal outliers in GPT-4o's distribution indicate consistent and reliable scoring behavior across diverse question types and difficulty levels. This superior performance validates our choice of GPT-4o as the primary evaluation model for LLMEval-3, ensuring that automated scores closely align with human expert judgment.
-
-**Comparative Judge Model Analysis**: The visualization reveals significant performance variations among different judge models, with clear hierarchical patterns in their agreement with human evaluators. While GPT-4o leads in consistency, other models show varying degrees of reliability, with some exhibiting wider variance ranges and more frequent outliers. This analysis underscores the critical importance of judge model selection in automated evaluation systems and demonstrates that not all large language models are equally suitable for assessment tasks.
-
-**Statistical Robustness and Variance Analysis**: The box plot distributions provide insights into the statistical robustness of each judge model's performance. Models with tighter distributions and fewer outliers demonstrate more predictable and stable evaluation behavior, which is essential for fair and consistent model comparison. The presence of outliers in some judge models highlights potential edge cases where automated evaluation may diverge from human judgment, informing our understanding of evaluation limitations.
-
-
-### 📈 Key Insights
-
-Through our longitudinal study spanning from 2023 to 2025, LLMEval-3 has revealed remarkable patterns in large language model development. The most striking finding is the acceleration of technological progress, with model performance exhibiting exponential improvement trends that have fundamentally transformed the landscape of AI capabilities. Performance metrics have surged from GPT-3.5-turbo's baseline of 51.9 points to the current state-of-the-art Doubao-1.5-Thinking-Pro achieving 93.67 points, representing an 80% improvement in absolute terms within just two years.
-
-Our analysis has also uncovered significant advances in multilingual competency, particularly in Chinese language understanding and academic knowledge processing. Domestic Chinese models have demonstrated exceptional competitive strength, with several achieving performance levels that match or exceed international benchmarks in discipline-specific evaluations. This trend indicates a maturation of localized AI development and the emergence of region-specific excellence in language model capabilities.
-
-The evaluation methodology itself has proven highly robust, with our relative scoring system effectively mitigating the systematic biases typically introduced by random sampling. Cross-temporal consistency analysis shows that models maintaining higher relative scores demonstrate more stable performance patterns across multiple evaluation rounds, validating the reliability of our dynamic benchmarking approach. Furthermore, our discipline-specific analysis reveals distinct performance patterns across academic domains, with STEM fields generally showing higher achievable scores compared to humanities and social sciences, suggesting varying complexity thresholds in different knowledge domains.
-
-## 🎓 Academic Contributions
-
-### 🏅 Research Impact
-
-LLMEval-3 represents a pioneering contribution to the field of large language model evaluation, establishing the first comprehensive longitudinal benchmark that systematically tracks model evolution across multiple years and diverse academic disciplines. Our work addresses a critical gap in existing evaluation methodologies by providing continuous, standardized assessment protocols that enable fair comparison of models developed at different time periods. This longitudinal approach has generated unprecedented insights into the trajectory of AI development, revealing acceleration patterns and capability emergence trends that were previously unobservable through static benchmarking approaches.
-
-The introduction of our robust relative evaluation framework constitutes a methodological innovation that solves fundamental fairness issues in cross-temporal model comparison. By implementing dynamic benchmarking against current state-of-the-art models rather than fixed historical baselines, we have created a evaluation system that remains relevant and discriminative as the field advances. This approach has proven particularly valuable in documenting the rapid pace of recent AI development, where traditional fixed benchmarks quickly become saturated or obsolete.
-
-Our comprehensive validation of automated assessment methodologies provides crucial empirical evidence supporting the reliability of large-scale AI-based evaluation systems. Through extensive comparison with human expert judgments, we have demonstrated that carefully designed automated evaluation can achieve high consistency with human assessment while enabling the scale necessary for comprehensive model comparison. This validation work has important implications for the broader AI evaluation community, offering methodological foundations for future large-scale benchmark development.
-
-### 🔮 Future Directions
-
-- **Scale Expansion**: Growing from 200K to 1M questions
-- **Multimodal Integration**: Text-image and mathematical formula evaluation
-- **Global Localization**: Multi-language benchmark versions
-- **Real-time Platform**: Live evaluation and monitoring system
-
-## 🚀 Getting Started
-
-### Online Evaluation
-Visit our evaluation platform: **[http://llmeval.com/](http://llmeval.com/)**
-
-### Institutional Access
-1. Register an account on our platform
-2. Contact administrators for institutional verification
-3. Submit evaluation requests for your models
-4. Receive detailed performance reports
-
-### Evaluation Process
-- **Fair Sampling**: Each model receives unique question sets
-- **Standardized Protocol**: Consistent evaluation procedures
-- **Comprehensive Reporting**: Detailed performance analytics
-- **Leaderboard Integration**: Automatic ranking updates
-
-
-
-
-
-## 🤝 Contributing
-
-We welcome contributions from the research community! Please feel free to:
-
-- Submit issues for bug reports or feature requests
-- Propose new evaluation metrics or methodologies  
-- Contribute additional question sets or domains
-- Suggest improvements to our evaluation framework
 
 ## 📞 Contact Us
 
-For questions, suggestions, or collaboration opportunities:
+This project is open to the public, and we welcome you to participate in our evaluation.
+
+Institutional evaluation requires certification. After registering an account, please contact the administrators for verification and to apply for evaluation permissions.
+
+Unless there are special circumstances, all evaluation results will be added to the leaderboard upon completion.
 
 - **Website**: [http://llmeval.com/](http://llmeval.com/)
 - **Email**: mingzhang23@m.fudan.edu.cn
