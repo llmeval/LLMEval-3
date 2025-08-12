@@ -189,8 +189,9 @@ $$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
 当前排名模型的性能表现在时间的分布如图所示：
 
 <div align="center">
-<img src=".\pic\trend_of_model_series.png" alt="模型性能发展趋势" style="zoom:80%;" />
+<img src=".\pic\trend_of_models.png" alt="模型性能发展趋势" style="zoom:80%;" />
 </div>
+
 
 更多的实验细节与实验分析请参考我们的[论文](https://arxiv.org/abs/2508.05452)。
 

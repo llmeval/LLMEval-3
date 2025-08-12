@@ -185,8 +185,10 @@ Where $s_i$ is the score for question i, and $s_{max}=3$.
 The performance distribution over time for the currently ranked models is shown in the figure below:
 
 <div align="center">
-<img src=".\pic\trend_of_model_series.png" alt="Model Performance Trends" style="zoom:80%;" />
+<img src=".\pic\trend_of_models.png" alt="Model Performance Trends" style="zoom:80%;" />
 </div>
+
+
 
 For more experimental details and analysis, please refer to our [paper](https://arxiv.org/abs/2508.05452).
 
