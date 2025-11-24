@@ -85,7 +85,6 @@ $$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
 | Gemini-2.5-Pro-Preview | Google | API | 2025.7.21 | 97.22 | 91.07 |
 | Gemini-2.5-Pro-Preview-Thinking | Google | API | 2025.7.21 | 97.15 | 91.00 |
 | DeepSeek-V3 | DeepSeek | API | 2025.7.21 | 96.48 | 90.37 |
-| Qwen2-7B-Instruct | Alibaba Cloud | API | 2024.6.6 | 65.15 | 61.03 | 
 | Qwen3-235B | Alibaba Cloud | API | 2025.7.21 | 96.44 | 90.33 |
 | Doubao-1.5-Pro-256K | 字节跳动 | API | 2025.7.21 | 95.69 | 89.63 |
 | QwQ-32B | Alibaba Cloud | API | 2025.8.1 | 94.52 | 88.54 |
@@ -103,22 +102,21 @@ $$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
 | Qwen-Turbo-1101 | Alibaba Cloud | API | 2025.8.1 | 83.71 | 78.41 |
 | Claude-3.5-Sonnet | Anthropic | API | 2025.8.1 | 83.38 | 78.10 |
 | O1-Mini-2024-09-12 | OpenAI | API | 2025.8.1 | 78.93 | 73.93 |
-| Claude-3-Haiku | Anthropic | API | 2025.8.1 | 62.95 | 58.97 |
-| LLama-3.1-8B | Meta | API | 2024.7.23 | 41.24 | 38.63 | 
-| LLama-3.2-90B-Vision-Instruct | Meta | API | 2025.8.1 | 61.74 | 57.83 |
-| LLama-3.3-70B | Meta | API | 2025.8.1 | 60.85 | 57.00 |
-| Megrez-3B-Instruct | Megrez | API | 2024.12.16 | 67.01 | 62.77 | 
-| Phi-3-Medium-128K-Instruct | Microsoft | API | 2025.8.1 | 36.94 | 34.60 |
-| Phi-4-Final | Microsoft | API | 2024.12.12 | 63.98 | 59.93 | 
 | GPT-4 Turbo(gpt-4-1106-preview) | OpenAI | API | 2023.11.18 | 78.56 | 73.6 |
 | GPT-4-0125-Preview | OpenAI | API | 2024.1.28 | 76.44 | 71.6 |
 | 百度文心4.0 | 百度 | API | 2023.11.1 | 75.09 | 70.33 |
 | Yi-34B-Chat | 零一万物 | API | 2023.12.1 | 70.17 | 65.70 |
 | 百度文心3.5 | 百度 | API | 2023.11.1 | 69.14 | 64.73 |
 | ChatGLM-Pro | 清华&智谱AI | API | 2023.11.1 | 69.14 | 64.73 |
+| Megrez-3B-Instruct | Megrez | API | 2024.12.16 | 67.01 | 62.77 |
 | GPT-4-0613 | OpenAI | API | 2023.9.29 | 66.17 | 61.97 |
 | 讯飞星火v3.0 | 科大讯飞 | API | 2023.11.7 | 65.64 | 61.47 |
+| Qwen2-7B-Instruct | Alibaba Cloud | API | 2024.6.6 | 65.15 | 61.03 |
 | Nanbeige-Plus | 南北阁实验室 | API | 2023.12.1 | 65.14 | 61.00 |
+| Phi-4-Final | Microsoft | API | 2024.12.12 | 63.98 | 59.93 |
+| Claude-3-Haiku | Anthropic | API | 2025.8.1 | 62.95 | 58.97 |
+| LLama-3.2-90B-Vision-Instruct | Meta | API | 2025.8.1 | 61.74 | 57.83 |
+| LLama-3.3-70B | Meta | API | 2025.8.1 | 60.85 | 57.00 |
 | Baichuan2-13B-Chat | 百川智能 | 权重 | 2023.9.29 | 58.31 | 54.6 |
 | Gemini-Pro | Google | API | 2024.1.10 | 58.20 | 54.5 |
 | Qwen-Plus | 阿里云 | API | 2023.11.1 | 56.60 | 53.0 |
@@ -128,9 +126,11 @@ $$S_{model}=\sum_{i=1}^N{\frac{s_i}{s_{max}} \times 100} \quad (1)$$
 | MiniMax-Abab5 | MiniMax | 权重 | 2023.11.1 | 55.33 | 51.83 |
 | Mixtral-8x7B-Instruct | Mistral AI | 权重 | 2024.1.10 | 51.69 | 48.4 |
 | ChatGLM2-6B | 清华&智谱AI | 权重 | 2023.9.29 | 42.32 | 39.63 |
+| LLama-3.1-8B | Meta | API | 2024.7.23 | 41.24 | 38.63 |
 | Ziya-v1.1-13B | IDEA研究院 | 权重 | 2023.9.29 | 40.18 | 37.63 |
 | InternLM-Chat-7B | 上海AI实验室&商汤 | 权重 | 2023.9.29 | 38.73 | 36.27 |
 | Linly-Chinese-LLaMA-2-13B-HF | 大数据系统计算技术国家工程实验室 | 权重 | 2023.10.3 | 37.06 | 34.7 |
+| Phi-3-Medium-128K-Instruct | Microsoft | API | 2025.8.1 | 36.94 | 34.60 |
 | BELLE-LLaMA2-13B-Chat-0.4M | 链家科技 | 权重 | 2023.10.1 | 36.28 | 33.97 |
 | LLaMA-2-7B-Chat-HF | Meta | 权重 | 2023.9.29 | 25.24 | 23.63 |
 
