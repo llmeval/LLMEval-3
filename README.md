@@ -1,5 +1,5 @@
 <div align="center">
-<h2>LLMEval-3: A Large-Scale Longitudinal Study on Robust and Fair Evaluation of Large Language Models</h2>
+<h2>LLMEval-Fair: A Large-Scale Longitudinal Study on Robust and Fair Evaluation of Large Language Models</h2>
 
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-blue.svg?style=for-the-badge)](https://arxiv.org/abs/2508.05452)
 
@@ -14,21 +14,21 @@
 
 ## 📚 Benchmark Content and Format
 
-LLMEval-3 focuses on evaluating professional knowledge capabilities, covering 13 academic disciplines as defined by the Ministry of Education: Philosophy, Economics, Law, Education, Literature, History, Science, Engineering, Agriculture, Medicine, Military Science, Management, and Arts. It includes over 50 sub-disciplines and a total of approximately 200,000 standardized generative question-answering items (we will continue to expand the question bank to 1 million).
+LLMEval-Fair focuses on evaluating professional knowledge capabilities, covering 13 academic disciplines as defined by the Ministry of Education: Philosophy, Economics, Law, Education, Literature, History, Science, Engineering, Agriculture, Medicine, Military Science, Management, and Arts. It includes over 50 sub-disciplines and a total of approximately 200,000 standardized generative question-answering items (we will continue to expand the question bank to 1 million).
 
 <div align="center">
 <img src=".\pic\subjects.PNG" alt="Academic Disciplines Coverage" style="zoom:80%;" />
 </div>
 
-Question sources mainly include **undergraduate homework**, **undergraduate mid-term and final exams**, and **graduate entrance exams**. To prevent large models from being exposed to a significant portion of the evaluation data during pre-training, LLMEval-3 sources its questions from non-public channels where possible. The data is in PDF and Word formats, which undergo OCR and data cleaning before being formatted. A standardized interface is provided for different question types to enable a fully automated process for the models under test.
+Question sources mainly include **undergraduate homework**, **undergraduate mid-term and final exams**, and **graduate entrance exams**. To prevent large models from being exposed to a significant portion of the evaluation data during pre-training, LLMEval-Fair sources its questions from non-public channels where possible. The data is in PDF and Word formats, which undergo OCR and data cleaning before being formatted. A standardized interface is provided for different question types to enable a fully automated process for the models under test.
 
-Unlike other knowledge benchmarks that use a multiple-choice format, LLMEval-3 treats all questions as **generative knowledge question-answering**. It includes a variety of formats such as short answer, calculation, true/false, analysis, and essay questions. Compared to standardized multiple-choice questions, the generative format used in LLMEval-3 better reflects real-world user needs and the language capabilities of the models.
+Unlike other knowledge benchmarks that use a multiple-choice format, LLMEval-Fair treats all questions as **generative knowledge question-answering**. It includes a variety of formats such as short answer, calculation, true/false, analysis, and essay questions. Compared to standardized multiple-choice questions, the generative format used in LLMEval-Fair better reflects real-world user needs and the language capabilities of the models.
 
 ## 🔬 Methodology
 
 ### Evaluation Pipeline
 
-Preventing cheating is a key consideration for LLMEval-3. Existing public benchmarks suffer from test set leakage, which can lead to unfair practices like "leaderboard hacking" or score inflation. In LLMEval-3, each participating system must complete 1,000 questions randomly sampled from the total question bank. **For models from the same institution, we ensure that the questions are not repeated in subsequent evaluations**. The evaluation is conducted online, with questions sent sequentially in a single round; the next question is only sent after the previous one has been answered, preventing malicious crawling.
+Preventing cheating is a key consideration for LLMEval-Fair. Existing public benchmarks suffer from test set leakage, which can lead to unfair practices like "leaderboard hacking" or score inflation. In LLMEval-Fair, each participating system must complete 1,000 questions randomly sampled from the total question bank. **For models from the same institution, we ensure that the questions are not repeated in subsequent evaluations**. The evaluation is conducted online, with questions sent sequentially in a single round; the next question is only sent after the previous one has been answered, preventing malicious crawling.
 
 This round of evaluation uses an automated scoring method, with GPT-4 Turbo as the current evaluation model. Each question is scored on a scale of 0-3 points. The scoring focuses on the core correctness of the answer and the validity of the explanation, with core correctness being the primary metric. The evaluation prompt used is as follows:
 
@@ -53,7 +53,7 @@ You must provide your feedback in the following format:
 
 ### Scoring
 
-To mitigate systematic bias introduced by randomly sampling 1,000 questions, LLMEval-3 uses both **relative scores** and **absolute scores**.
+To mitigate systematic bias introduced by randomly sampling 1,000 questions, LLMEval-Fair uses both **relative scores** and **absolute scores**.
 
 **Relative Score Calculation:**
 Given the rapid development of large language model technology, we introduce a relative score to measure the gap between a model and the current state-of-the-art performance. We select the top-performing model on the leaderboard as the SOTA baseline, which is currently Doubao-1.5-Thinking-Pro:
@@ -232,6 +232,6 @@ Unless there are special circumstances, all evaluation results will be added to 
 
 <div align="center">
 
-**LLMEval-3** | Building the Future of LLM Evaluation
+**LLMEval-Fair** | Building the Future of LLM Evaluation
 
 </div>
